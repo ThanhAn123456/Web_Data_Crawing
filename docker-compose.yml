@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  mysql_service:
+    container_name: mysql_service
+    build: ./mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app_network
+
+  db_api:
+    container_name: db_api
+    build: ./db_api
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mysql_service
+    networks:
+      - app_network
+
+  web:
+    container_name: web
+    build: ./web
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db_api
+    networks:
+      - app_network
+
+  data_crawling:
+    container_name: data_crawling
+    build: ./data_crawling
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db_api
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
