@@ -126,7 +126,7 @@ def craw():
                     'name': product_name,
                     'price': product['item']['price'],
                     'quantity': product['item']['quantity'] if 'quantity' in product['item'] else 1,
-                    'image': product['item']['thumbnail_url']
+                    'image': product['item'].get('thumbnail_url', 'https://cdn1.vectorstock.com/i/1000x1000/76/90/not-found-rubber-stamp-vector-13537690.jpg')
                 })
                 seen_ids.add(product_id)
     return { 'result': "OK" if len(products) > 0 else "FAIL" }

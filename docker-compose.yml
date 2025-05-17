@@ -5,7 +5,7 @@ services:
     container_name: mysql_service
     build: ./mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - app_network
 
